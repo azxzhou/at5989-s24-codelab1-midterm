@@ -283,7 +283,7 @@ public class GameManager : MonoBehaviour
 
         if (isInGame)
         {
-            timerdisplay.text = "time: " + (maxTime = (int)timer);
+            timerdisplay.text = "time: " + (maxTime - (int)timer);
             //counts down from timer + makes whole number
             
             //strings for cubes and scores
@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
             //if timer finishes
         {
             isInGame = false;
-            SceneManager.LoadScene("EndScene");
+            //SceneManager.LoadScene("EndScene");
         }
 
     }
