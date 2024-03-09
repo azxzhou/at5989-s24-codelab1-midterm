@@ -276,8 +276,9 @@ public class GameManager : MonoBehaviour
     //timer
         float timer = 0;
         
-        float maxTime = 10;
+        float maxTime = 15;
         
+    //check if game is active
         bool isInGame = true;
         
     //text
@@ -315,9 +316,6 @@ public class GameManager : MonoBehaviour
         Cube1Score = 0;
         Cube2Score = 0;
         Cube3Score = 0;
-        
-        //total score
-        totalScore = cube1Score + cube2Score + cube3Score;
 
     }
 
@@ -353,6 +351,9 @@ public class GameManager : MonoBehaviour
             isInGame = false;
             //SceneManager.LoadScene("EndScene");
         }
+        
+        //total score
+        totalScore = Cube1Score + Cube2Score + Cube3Score;
 
     }
 
