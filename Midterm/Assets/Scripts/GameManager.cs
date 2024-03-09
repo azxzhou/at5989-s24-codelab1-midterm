@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     //file paths
-        const string FILE_DIR = "/Data/";
+        const string FILE_DIR = "/SAVE_DATA/";
 
         const string C1_DATA_FILE = "cube1highscores.txt";
 
@@ -36,80 +36,7 @@ public class GameManager : MonoBehaviour
         private int cube3Score; //blue cube
 
         private int totalScore; //all scores together
-
-    //these three are accessible by other scripts - gets and sets based on private equivalents here
-        public int Cube1Score
-        {
-            get
-            {
-                return cube1Score;
-            }
-            set
-            {
-                cube1Score = value;
-                
-                if (C1isHighScore(cube1Score))
-                {
-                    int c1highscoreSlot = -1;
-
-                    for (int i = 0; i < c1HighScores.Count; i++)
-                    {
-                        c1highScoreSlot = i;
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        public int Cube2Score
-        {
-            get
-            {
-                return cube2Score;
-            }
-            set
-            {
-                cube2Score = value;
-
-                if (C2isHighScore(cube2Score))
-                {
-                    int c2highscoreSlot = -1;
-
-                    for (int i = 0; i < c2HighScores.Count; i++)
-                    {
-                        c2highScoreSlot = i;
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        public int Cube3Score
-        {
-            get
-            {
-                return cube3Score;
-            }
-            set
-            {
-                cube3Score = value;
-
-                if (C3isHighScore(cube3Score))
-                {
-                    int c3highscoreSlot = -1;
-
-                    for (int i = 0; i < c3HighScores.Count; i++)
-                    {
-                        c3highScoreSlot = i;
-
-                        break;
-                    }
-                }
-            }
-        }
-
+        
     //ints for high scores slot - constrained to this script
         public int c1highScoreSlot;
 
@@ -228,6 +155,123 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    //these three are accessible by other scripts - gets and sets based on private equivalents here
+        public int Cube1Score
+        {
+            get
+            {
+                return cube1Score;
+            }
+            set
+            {
+                cube1Score = value;
+                
+                if (C1isHighScore(cube1Score))
+                {
+                    int c1highScoreSlot = -1;
+
+                    for (int i = 0; i < c1HighScores.Count; i++)
+                    {
+                        c1highScoreSlot = i;
+
+                        break;
+                    }
+                }
+                
+                c1highScores.Insert(c1highScoreSlot, cube1Score);
+
+                c1highScores = c1highScores.GetRange(0, 1);
+
+                string c1highScoreText = "";
+
+                foreach (var c1HighScore in c1highScores)
+                {
+                    c1highScoreText += c1HighScore;
+                }
+
+                c1highScoresString = c1highScoreText;
+                
+                File.WriteAllText(FILE_C1_PATH, c1highScoresString);
+            }
+        }
+
+        public int Cube2Score
+        {
+            get
+            {
+                return cube2Score;
+            }
+            set
+            {
+                cube2Score = value;
+
+                if (C2isHighScore(cube2Score))
+                {
+                    int c2highScoreSlot = -1;
+
+                    for (int i = 0; i < c2HighScores.Count; i++)
+                    {
+                        c2highScoreSlot = i;
+
+                        break;
+                    }
+                }
+                
+                c2highScores.Insert(c2highScoreSlot, cube2Score);
+
+                c2highScores = c2highScores.GetRange(0, 1);
+
+                string c2highScoreText = "";
+
+                foreach (var c2HighScore in c2highScores)
+                {
+                    c2highScoreText += c2HighScore;
+                }
+
+                c2highScoresString = c2highScoreText;
+                
+                File.WriteAllText(FILE_C2_PATH, c2highScoresString);
+            }
+        }
+
+        public int Cube3Score
+        {
+            get
+            {
+                return cube3Score;
+            }
+            set
+            {
+                cube3Score = value;
+
+                if (C3isHighScore(cube3Score))
+                {
+                    int c3highScoreSlot = -1;
+
+                    for (int i = 0; i < c3HighScores.Count; i++)
+                    {
+                        c3highScoreSlot = i;
+
+                        break;
+                    }
+                }
+                
+                c3highScores.Insert(c3highScoreSlot, cube3Score);
+
+                c3highScores = c3highScores.GetRange(0, 1);
+
+                string c3highScoreText = "";
+
+                foreach (var c3HighScore in c3highScores)
+                {
+                    c3highScoreText += c3HighScore;
+                }
+
+                c3highScoresString = c3highScoreText;
+                
+                File.WriteAllText(FILE_C3_PATH, c3highScoresString);
+            }
+        }
 
     //timer
         float timer = 0;

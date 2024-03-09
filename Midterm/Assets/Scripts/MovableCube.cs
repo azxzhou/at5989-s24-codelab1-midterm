@@ -8,14 +8,14 @@ using Input = UnityEngine.Input;
 
 public class MovableCube : MonoBehaviour
 {
-    const string FILE_DIR = "/SAVE_DATA/";
+    //const string FILE_DIR = "/SAVE_DATA/";
 
-    string FILE_NAME = "<name>.json";
+    //string FILE_NAME = "<name>.json";
 
-    string FILE_PATH;
+    //string FILE_PATH;
     
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         FILE_NAME = FILE_NAME.Replace("<name>", name); 
         //replaces placeholder with variable (file name)
@@ -35,7 +35,7 @@ public class MovableCube : MonoBehaviour
             transform.position = JsonUtility.FromJson<Vector3>(jsonStr);
             //set positions based on vector3 data
         }
-    }
+    }*/
 
     void OnMouseDrag()
     {
@@ -56,7 +56,7 @@ public class MovableCube : MonoBehaviour
         return result;
     }
     
-    void OnApplicationQuit()
+    /*void OnApplicationQuit()
     {
         string fileContent = JsonUtility.ToJson(transform.position, true);
         //grab transform.position data
@@ -65,5 +65,5 @@ public class MovableCube : MonoBehaviour
         
         File.WriteAllText(FILE_PATH, fileContent);
         //write data to specified path
-    }
+    }*/
 }
