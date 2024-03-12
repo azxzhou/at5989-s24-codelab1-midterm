@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
             {
                 if (c1highScores == null)
                 {
+                    Debug.Log("Loading scores...");
+                    
                     c1highScores = new List<int>(); 
                     //creates list if one does not already exist
 
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour
                         //converts string into int
 
                         c1highScores.Add(c1currentScore);
+                        
+                        Debug.Log(c1highScores);
                         //add cube 1 score to high scores list
                     }
                 }
@@ -114,8 +118,8 @@ public class GameManager : MonoBehaviour
                         int c2currentScore = Int32.Parse(c2highScoreArray[i]);
                         //converts string into int
 
-                        c1highScores.Add(c2currentScore);
-                        //add cube 1 score to high scores list
+                        c2highScores.Add(c2currentScore);
+                        //add cube 2 score to high scores list
                     }
                 }
 
@@ -147,7 +151,7 @@ public class GameManager : MonoBehaviour
                         //converts string into int
 
                         c3highScores.Add(c3currentScore);
-                        //add cube 1 score to high scores list
+                        //add cube 3 score to high scores list
                     }
                 }
 
@@ -172,13 +176,18 @@ public class GameManager : MonoBehaviour
 
                     for (int i = 0; i < c1HighScores.Count; i++)
                     {
-                        c1highScoreSlot = i;
+                        //Debug.Log(c1highScores[1]);
+                        
+                        if (cube1Score > c1HighScores[i])
+                        {
+                            c1highScoreSlot = i;
 
-                        break;
+                            break;
+                        }
                     }
                 }
                 
-                c1highScores.Insert(c1highScoreSlot, cube1Score);
+                c1HighScores.Insert(c1highScoreSlot, cube1Score);
 
                 c1highScores = c1highScores.GetRange(0, 1);
 
@@ -211,9 +220,12 @@ public class GameManager : MonoBehaviour
 
                     for (int i = 0; i < c2HighScores.Count; i++)
                     {
-                        c2highScoreSlot = i;
-
-                        break;
+                        if (cube2Score > c2highScores[i])
+                        {
+                            c2highScoreSlot = i;
+                            
+                            break;
+                        }
                     }
                 }
                 
@@ -250,9 +262,12 @@ public class GameManager : MonoBehaviour
 
                     for (int i = 0; i < c3HighScores.Count; i++)
                     {
-                        c3highScoreSlot = i;
+                        if (cube3Score > c3highScores[i])
+                        {
+                            c3highScoreSlot = i;
 
-                        break;
+                            break;
+                        }
                     }
                 }
                 
@@ -276,7 +291,7 @@ public class GameManager : MonoBehaviour
     //timer
         float timer = 0;
         
-        float maxTime = 15;
+        float maxTime = 5;
         
     //check if game is active
         bool isInGame = true;
@@ -316,6 +331,8 @@ public class GameManager : MonoBehaviour
         Cube1Score = 0;
         Cube2Score = 0;
         Cube3Score = 0;
+        
+        Debug.Log(c1HighScores);
 
     }
 
@@ -335,6 +352,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            //Debug.Log("end game: " + totalScore);
+            
             timerdisplay.text = "game over!" + "\ntotal cubes: " + totalScore;
             
             c1display.text = "pink high score: " + c1highScoresString;
@@ -349,7 +368,7 @@ public class GameManager : MonoBehaviour
             //if timer finishes
         {
             isInGame = false;
-            //SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("EndScene");
         }
         
         //total score
@@ -397,7 +416,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < c3HighScores.Count; i++)
         {
-            if (c2highScores[i] < cube3Score)
+            if (c3highScores[i] < cube3Score)
             {
                 return true;
                 //this is a high score
